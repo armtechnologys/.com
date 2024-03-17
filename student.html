@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Navigation</title>
+<style>
+/* Existing CSS styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #4285f4;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .profile-icon {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #444;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.profile-info {
+  padding: 20px;
+  color: white;
+}
+
+/* New CSS styles for the added content */
+.course-info {
+  padding: 20px;
+  background-color: #f2f2f2;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.course-info h2 {
+  color: #4285f4;
+}
+
+.course-info p {
+  margin: 10px 0;
+}
+/* CSS styles for more beautiful bullet points */
+.course-info ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.course-info ul li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.course-info ul li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: #4285f4; /* You can change the color as desired */
+}
+/* CSS styles to add padding between lines of data */
+.course-info ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px; /* Add margin bottom to create space between lines */
+}
+
+.course-info ul li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: #4285f4; /* You can change the color as desired */
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="profile-icon" onclick="openNav()">
+    <!-- You can add your profile icon here -->
+  </div>
+</div>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="profile-info">
+    <p>Name: <span id="stdname"></span></p>
+    <p>Course: <span id="stdcourse"></span></p>
+    <p>Number: <span id="stdnumber"></span></p>
+    <p>Payment Status: <span id="stdstatus"></span></p>
+  </div>
+</div>
+
+<div class="course-info">
+<h2>Course Information</h2>
+</div>
+
+<div class="course-info">
+  <p><strong><h3>Day 1: Introduction to Python</h3></strong></p>
+  <ul>
+    <li>Introduction to Python and its features</li>
+    <li>Installing Python and setting up the development environment</li>
+    <li>Basic syntax and data types (integers, floats, strings, booleans)</li>
+    <h3>Practice programs:</h3>
+      <ul>
+        <li>Print "Hello, World!"</li>
+        <li>Perform basic arithmetic operations</li>
+        <li>Concatenate strings</li>
+        <li>Check type of different variables</li>
+        <li>Get user input and display it</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="course-info">
+  <p><strong><h3>Day 2: Variables and Data Types</h3></strong></p>
+  <ul>
+    <li>Variables and naming conventions</li>
+    <li>Basic data types (int, float, str, bool)</li>
+    <li>Type conversion (int(), float(), str(), bool())</li>
+    <h3>Practice programs:</h3>
+      <ul>
+        <li>Perform arithmetic operations on variables</li>
+        <li>Concatenate strings and convert to different data types</li>
+        <li>Use boolean variables and logical operators</li>
+        <li>Convert temperature from Celsius to Fahrenheit</li>
+        <li>Calculate the area of a circle using radius input from the user</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="course-info">
+  <p><strong><h3>Day 3: Control Flow - Conditional Statements</h3></strong></p>
+  <ul>
+    <li>If statements and indentation</li>
+    <li>Comparison operators (>, <, ==, !=, etc.)</li>
+    <li>Logical operators (and, or, not)</li>
+    <h3>Practice programs:</h3>
+      <ul>
+        <li>Check if a number is positive, negative, or zero</li>
+        <li>Determine the largest among three numbers</li>
+        <li>Check if a year is a leap year</li>
+        <li>Determine pass/fail based on exam score</li>
+        <li>Convert numeric grade to letter grade</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<script>
+// Existing JavaScript functions
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+}
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+}
+</script>
+
+<script type="module">
+  // Firebase initialization and data retrieval script remains the same
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+  // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyDFOBME6UGMlus3V05TK_1XvQt7WsuxyVE",
+        authDomain: "studentregistration-1fda1.firebaseapp.com",
+        databaseURL: "https://studentregistration-1fda1-default-rtdb.firebaseio.com",
+        projectId: "studentregistration-1fda1",
+        storageBucket: "studentregistration-1fda1.appspot.com",
+        messagingSenderId: "759327168346",
+        appId: "1:759327168346:web:da330a79f4cb3845b88563"
+    };
+
+  // Initialize Firebase app
+  const app = initializeApp(firebaseConfig);
+
+  // Get a reference to the database
+  const db = getDatabase(app);
+
+  // Rest of your code
+  var usr_name = sessionStorage.getItem("uname");
+
+  var stdname = document.getElementById("stdname");
+  var stdcourse = document.getElementById("stdcourse");
+  var stdnumber = document.getElementById("stdnumber");
+  var stdstatus = document.getElementById("stdstatus");
+
+  var stdname = document.getElementById("stdname");
+
+
+  function variables(){
+      const userRef = ref(db, `RegisteredMember/${usr_name}`);
+      get(userRef).then((snapshot) => {
+          if (snapshot.exists()) {
+            stdname.innerHTML = snapshot.val().nameofstudent;
+            stdcourse.innerHTML = snapshot.val().course;
+            stdnumber.innerHTML = snapshot.val().mobile_numberofstudent;
+            stdstatus.innerHTML = snapshot.val().collegeofstudent;
+          }
+          else {
+              alert("User does not exist");
+          }
+      }).catch((error) => {
+          console.error("Error getting user data: ", error);
+      });
+  }
+
+  window.onload = function() {
+      variables();
+  };
+</script>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retrieve Student Data from Firebase</title>
+
+<style>
+    /* Apply Material Design colors to the table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        border: 1px solid #ccc; /* Add border to the table */
+    }
+
+    th, td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e0e0e0;
+        border-right: 1px solid #e0e0e0; /* Add right border to each cell */
+    }
+
+    th {
+        background-color: #f5f5f5;
+        font-weight: 700;
+    }
+
+    /* Make the table responsive for mobile devices */
+    @media only screen and (max-width: 600px) {
+        th, td {
+            padding: 10px;
+        }
+    }
+
+    /* Style the input field */
+    input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 300px; /* Define your desired width */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+
+    /* Style the button */
+    button {
+        background-color: #4285f4; /* Google Blue */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px auto;
+        width: 300px;
+        display: block;
+    }
+
+    /* Hover effect on the button */
+    button:hover {
+        background-color: #357ae8; /* Darker shade of Google Blue */
+    }
+
+    /* Make the button responsive */
+    @media only screen and (max-width: 600px) {
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+    }
+    #usernameDisplay {
+        text-align: center;
+        font-size: larger;
+        font-style: italic;
+        color: green;
+    }
+</style>
+
+<!-- Import Firebase SDK modules -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDFOBME6UGMlus3V05TK_1XvQt7WsuxyVE",
+        authDomain: "studentregistration-1fda1.firebaseapp.com",
+        databaseURL: "https://studentregistration-1fda1-default-rtdb.firebaseio.com",
+        projectId: "studentregistration-1fda1",
+        storageBucket: "studentregistration-1fda1.appspot.com",
+        messagingSenderId: "759327168346",
+        appId: "1:759327168346:web:da330a79f4cb3845b88563"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Define the function globally
+    window.retrieveStudentData = async function() {
+        const studentId = document.getElementById('studentId').value.trim(); // Get student ID from input field
+        if (studentId) {
+            try {
+                const database = getDatabase();
+                const studentRef = ref(database, 'RegisteredMember/' + studentId);
+                const snapshot = await get(studentRef);
+                if (snapshot.exists()) {
+                    const studentData = snapshot.val(); // Get student data
+                    displayStudentData(studentData); // Display student data in a table
+                } else {
+                    console.log("No student found with ID:", studentId);
+                }
+            } catch (error) {
+                console.error("Error retrieving student data:", error);
+            }
+        } else {
+            console.log("No Student ID entered.");
+        }
+    }
+
+    window.retrieveAllStudentsData = async function() {
+        try {
+            const database = getDatabase();
+            const studentsRef = ref(database, 'RegisteredMember');
+            const snapshot = await get(studentsRef);
+            if (snapshot.exists()) {
+                const studentsData = snapshot.val(); // Get all students data
+                displayAllStudentsData(studentsData); // Display all students data in a table
+            } else {
+                console.log("No students found.");
+            }
+        } catch (error) {
+            console.error("Error retrieving students data:", error);
+        }
+    }
+
+    // Function to display student data in a table format
+    function displayStudentData(studentData) {
+        clearTable(); // Clear existing table
+        const table = document.createElement('table');
+        const tbody = document.createElement('tbody');
+
+        for (const key in studentData) {
+            if (studentData.hasOwnProperty(key)) {
+                const tr = document.createElement('tr');
+                const tdKey = document.createElement('td');
+                const tdValue = document.createElement('td');
+
+                tdKey.textContent = key;
+                tdValue.textContent = studentData[key];
+
+                tr.appendChild(tdKey);
+                tr.appendChild(tdValue);
+                tbody.appendChild(tr);
+            }
+        }
+
+        table.appendChild(tbody);
+        document.body.appendChild(table);
+    }
+
+    // Function to display all students data in a table format
+// Function to display all students data in a table format
+// Function to display all students data in a table format
+function displayAllStudentsData(studentsData) {
+    clearTable(); // Clear existing table
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+
+    // Extracting headers
+    const headers = Object.keys(studentsData[Object.keys(studentsData)[0]]);
+    // Creating table headers
+    const trHeader = document.createElement('tr');
+
+    // Adding Sl. No. header
+    const slNoHeader = document.createElement('th');
+    slNoHeader.textContent = 'Sl. No.';
+    trHeader.appendChild(slNoHeader);
+
+    // Adding other headers
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        trHeader.appendChild(th);
+    });
+    thead.appendChild(trHeader);
+
+    let serialNumber = 1; // Initial serial number
+
+    for (const studentId in studentsData) {
+        if (studentsData.hasOwnProperty(studentId)) {
+            const studentData = studentsData[studentId];
+            const tr = document.createElement('tr');
+
+            // Adding Sl. No. column
+            const tdSlNo = document.createElement('td');
+            tdSlNo.textContent = serialNumber++;
+            tr.appendChild(tdSlNo);
+
+            // Adding other columns
+            headers.forEach(header => {
+                const td = document.createElement('td');
+                td.textContent = studentData[header];
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        }
+    }
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    document.body.appendChild(table);
+}
+
+
+    // Function to clear existing table
+    function clearTable() {
+        const existingTable = document.querySelector('table');
+        if (existingTable) {
+            existingTable.parentNode.removeChild(existingTable);
+        }
+    }
+
+    var username_ss = sessionStorage.getItem("uname");
+    if (username_ss) {
+      document.getElementById("usernameDisplay").textContent = "admin : " + username_ss;
+    } else {
+      document.getElementById("usernameDisplay").textContent = "No user logged in.";
+      window.location.href = "login.html";
+    }
+
+</script>
+</head>
+<body>
+    <p id="usernameDisplay"></p>
+  <input type="text" id="studentId" placeholder="Enter Student ID number">
+  <!-- Button to trigger the retrieval of student data -->
+  <button onclick="retrieveStudentData()">Retrieve Student Data</button>
+  <!-- Button to trigger the retrieval of all student data -->
+  <button onclick="retrieveAllStudentsData()">Show All Data</button>
+</body>
+</html>

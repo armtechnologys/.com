@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        input[type="button"] {
+            padding: 10px 40px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        
+        a {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        .main-head {
+            text-align: left;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-head">
+            <h2>Login Portal :</h2>
+        </div>
+        <form action="" method="get">
+
+            <label id="uname_l">User Name :</label>
+            <input type="text"  id="uname"><br>
+
+            <label id="uname_l">Password :</label>
+            <input type="text"  id="password"><br>
+
+            <input type="button" value="Submit" id="subm">
+
+        </form>
+        <a href="index.html">Register Here</a>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+            import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+        
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDFOBME6UGMlus3V05TK_1XvQt7WsuxyVE",
+                authDomain: "studentregistration-1fda1.firebaseapp.com",
+                databaseURL: "https://studentregistration-1fda1-default-rtdb.firebaseio.com",
+                projectId: "studentregistration-1fda1",
+                storageBucket: "studentregistration-1fda1.appspot.com",
+                messagingSenderId: "759327168346",
+                appId: "1:759327168346:web:da330a79f4cb3845b88563"
+            };
+        
+            // Initialize Firebase
+            const firebaseApp = initializeApp(firebaseConfig);
+            const db = getDatabase(firebaseApp);
+        
+            function Submit_process() {
+                let usr_name = document.getElementById('uname').value;
+                let usr_pwd = document.getElementById('password').value;
+        
+                // Check if the user is admin
+                if (usr_name === "vijayaanand" && usr_pwd === "18113251") {
+                    sessionStorage.setItem("uname", usr_name);
+                    window.location.href = "admin.html";
+                    return;
+                }
+        
+                const userRef = ref(db, `RegisteredMember/${usr_name}`);
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        // alert(snapshot.val().mobile_numberofstudent);
+                        window.location.href = "student.html";
+                        sessionStorage.setItem("uname", usr_name);
+                    }
+                    else {
+                        alert("User does not exist");
+                    }
+                }).catch((error) => {
+                    console.error("Error getting user data: ", error);
+                });
+            }
+        
+            document.getElementById('subm').addEventListener('click', Submit_process);
+        </script>
+        
+
+    </div>
+</body>
+</html>

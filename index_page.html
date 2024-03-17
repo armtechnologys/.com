@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArM Technologies</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding-bottom: 2rem;
+      background: #f0f0f0; /* Gradient Background */
+      align-items: center;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .course {
+      margin-bottom: 30px;
+    }
+    .course-card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+    .course-card h3 {
+      color: #007bff;
+      font-weight: 1000;
+      font-size: larger;
+      margin-bottom: 2rem;
+      /* background-color: #007bff; */
+      padding: 1rem;
+      border-radius: 2rem;
+      font-style: italic;
+    }
+    .btn-register {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-register:hover {
+      background-color: #0056b3;
+    }
+    .navbar {
+    background-color: #007bff; /* Background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    padding: 10px 0; /* Add padding */
+    color: #fff;
+    }
+
+    .navbar-brand {
+    font-size: 1.5rem; /* Brand text size */
+    font-weight: bold; /* Make the brand text bold */
+    color: #fff; /* Brand text color */
+    }
+
+    .navbar-brand img {
+    width: 40px; /* Adjust logo size */
+    margin-right: 10px; /* Add spacing between logo and text */
+    border-radius: 20%;
+    display: none;
+    }
+
+    .navbar-nav .nav-link {
+    font-size: 1rem; /* Link text size */
+    color: #fff; /* Link text color */
+    transition: color 0.3s ease; /* Smooth color transition */
+    }
+
+    .navbar-nav .nav-link:hover {
+    color: #fff; /* Hover color */
+    font-weight: 700;
+    }
+
+    .navbar-nav .nav-item {
+    margin-right: 20px; /* Add space between nav items */
+    }
+
+    .navbar-nav .nav-item:last-child {
+    margin-right: 0; /* Remove margin from the last nav item */
+    }
+
+    h1 {
+        font-weight: 800;
+        font-size: xx-large;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+    .highlighted {
+        background-color: yellow;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+    h2 {
+        font-weight: 700;
+        margin: 2rem 0rem;
+      }
+    #heading {
+        font-weight: 600;
+        font-size: x-large;
+        font-style: italic;
+        text-decoration: underline;
+      }
+
+      @media screen and (max-width: 768px) {
+    h1 {
+      font-size: large; /* Adjust font size for smaller screens */
+      margin-top: 2rem; /* Adjust top margin */
+      margin-bottom: 2rem; /* Adjust bottom margin */
+    }
+    #story {
+      padding: 0 1rem;
+    }
+    a.navbar-brand {
+      margin-left: 0;
+    }
+  }
+
+  a {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0056b3;
+  }
+
+  </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+
+          <a class="navbar-brand" href="#">
+            <!-- <img src="logo.jpg" style="width: 40px;"> -->
+            <span class="ml-2">ArM Technologies</span>
+          </a>
+      </nav>
+    
+
+  <div class="container">
+    <h1>Empowering the Future of Technology</h1>
+    <p id="story">At ArM Technologys, we take pride in our commitment to delivering cutting-edge special courses that not only revolutionize the technological landscape but also encompass a wide array of programming languages. From Python and Java to R and C++, our curriculum goes beyond conventional boundaries, offering real-time courses designed to equip our students with the skills and knowledge necessary to excel in tomorrow's challenges.</p>
+    
+    <div class="course">
+      <h2 id ="heading" >Our Courses:</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Web Development</h3>
+            <p>Dive into the world of web development and learn how to create dynamic and responsive websites using the latest technologies such as HTML, CSS, JavaScript, and frameworks like Bootstrap and React.</p>
+            <span class="highlighted">Availble!</span>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Machine Learning</h3>
+            <p>Explore the fascinating field of machine learning and artificial intelligence. Gain hands-on experience in building predictive models, deep learning algorithms, and neural networks to solve real-world problems.</p>
+            <span class="highlighted">Availble!</span>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Data Analysis</h3>
+            <p>Master the art of data analysis and visualization. Learn how to extract valuable insights from large datasets using tools like Python, Pandas, and Matplotlib, and make informed decisions based on data-driven analytics.</p>
+            <span class="highlighted">Availble!</span>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Embedded Systems</h3>
+            <p>Delve into the realm of embedded systems and learn how to design and develop embedded software for various applications. From microcontrollers to real-time operating systems, we cover everything you need to know to build embedded solutions.</p>
+            <span class="highlighted">Availble!</span>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Internet of Things (IoT)</h3>
+            <p>Discover the potential of IoT and its applications in connecting the physical world with the digital realm. Learn how to design IoT systems, collect sensor data, and develop IoT applications using platforms like Arduino and Raspberry Pi.</p>
+            <span class="highlighted">Availble!</span>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>VLSI </h3>
+            <p>Explore the intricate world of VLSI design and semiconductor technology. From logic gates to chip fabrication, our VLSI course covers all aspects of integrated circuit design and implementation.</p>
+            <span class="highlighted">Availble!</span>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="course">
+      <h2 id ="heading" >Special Courses:</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Quantum Computing</h3>
+            <p>Delve into the fascinating world of quantum computing, where traditional binary computing meets the mind-bending principles of quantum mechanics. Our course covers quantum algorithms, qubit manipulation, and quantum cryptography, providing you with the skills needed to harness the immense computational power of quantum systems.</p>
+            <span class="highlighted">comming soon!</span>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Augmented Reality (AR)</h3>
+            <p>Explore the exciting realm of augmented reality, where digital information seamlessly blends with the physical world. Learn how to develop AR applications using tools like Unity and ARKit, and discover the endless possibilities of overlaying virtual content onto your surroundings.</p>
+            <span class="highlighted">comming soon!</span>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="course-card">
+            <h3>Virtual Reality (VR)</h3>
+            <p>Immerse yourself in the immersive world of virtual reality, where you can escape reality and enter fully interactive digital environments. Our VR course covers the principles of 3D modeling, spatial computing, and VR development platforms like Unreal Engine and Oculus Rift, empowering you to create immersive experiences that transcend the boundaries of reality.</p>
+            <span class="highlighted">comming soon!</span>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn-register">Register Here</button>
+    <a href="login.html">Login Here</a>
+  </div>
+
+  <script>
+    document.querySelector('.btn-register').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  </script>
+
+</body>
+</html>

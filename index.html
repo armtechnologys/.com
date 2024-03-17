@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="email"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        input[type="button"] {
+            padding: 10px 40px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        
+        a {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        /* CSS for select element */
+        select.course {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            /* Add any additional styling here */
+        }
+        .main-head {
+            text-align: left;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-head">
+            <h2>Register Portal :</h2>
+        </div>
+        <form action="" method="get">
+
+            <label id="uname_l">Student Name :</label>
+            <input type="text"  id="uname" required><br>
+
+            <label id="uname_l">College :</label>
+            <input type="text"  id="college_id" required><br>
+
+            <label id="uname_l">course :</label>
+            <select id="course" class="course">
+                <option value="Python Full Course">Python Full Course</option>
+                <option value="Data Analysis">Data Analysis</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Machine Learning">Machine Learning</option>
+                <option value="Data Analysis">Embedded Systems</option>
+                <option value="Web Development">IoT</option>
+                <option value="Machine Learning">VLSI</option>
+              </select><br>
+
+            <label id="uname_l">Mobile Number :</label>
+            <input type="text"  id="Number" class="course" required><br>
+
+            <label id="uname_l">Course :</label>
+            <select id="course_studying" class="course">
+                <option value="B.Tech">B.Tech</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Degree">Degree</option>
+              </select><br>
+
+            <label id="uname_l">Group :</label>
+            <select id="group" class="course">
+                <option value="B.Tech">CSE</option>
+                <option value="Diploma">AI</option>
+                <option value="Degree">ECE</option>
+                <option value="Degree">DS</option>
+                <option value="Degree">AGRI</option>
+                <option value="Degree">MECH</option>
+              </select><br>
+
+            <label id="uname_l">Student Mail :</label>
+            <input type="text"  id="email" required><br>
+
+            <input type="button" value="Submit" id="subm">
+        </form>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        const firebaseConfig = {
+        apiKey: "AIzaSyDFOBME6UGMlus3V05TK_1XvQt7WsuxyVE",
+        authDomain: "studentregistration-1fda1.firebaseapp.com",
+        databaseURL: "https://studentregistration-1fda1-default-rtdb.firebaseio.com",
+        projectId: "studentregistration-1fda1",
+        storageBucket: "studentregistration-1fda1.appspot.com",
+        messagingSenderId: "759327168346",
+        appId: "1:759327168346:web:da330a79f4cb3845b88563"
+    };
+        
+        const app = initializeApp(firebaseConfig);
+
+        import {getDatabase, ref, child, get, set, update, remove} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        const db = getDatabase();
+
+        let studentname = document.getElementById("uname");
+        let college = document.getElementById("college_id");
+        let course = document.getElementById("course");
+        let mobile_number = document.getElementById("Number");
+        let course_studying = document.getElementById("course_studying");
+        let group = document.getElementById("group");
+        let email_id = document.getElementById("email");
+
+        let sub = document.getElementById("subm");
+        let read_data = document.getElementById("read");
+
+        function AddData() {
+        // Check if the email already exists in the database
+        const emailRef = ref(db, 'RegisteredMember');
+        get(child(emailRef, mobile_number.value)).then((snapshot) => {
+            if (snapshot.exists()) {
+                alert("Mobile already registered!");
+            } else {
+                set(ref(db, 'RegisteredMember/' + mobile_number.value), {
+                    nameofstudent : studentname.value,
+                    collegeofstudent : college.value,
+                    course : course.value,
+                    mobile_numberofstudent : mobile_number.value,
+                    course_studyingofstudent : course_studying.value,
+                    groupofstudent : group.value,
+                    email_idofstudent : email_id.value
+                })
+                .then(()=>{
+                    alert("Data Added Successfully");
+                    window.location.href = "success.html";
+                })
+                .catch((error)=>{
+                    alert("Unsuccessful");
+                    console.log(error);
+                });
+            }
+        }).catch((error) => {
+            console.error("Error getting data:", error);
+        });
+    }
+
+        subm.addEventListener('click', AddData);
+
+      </script>
+
+</body>
+</html>
